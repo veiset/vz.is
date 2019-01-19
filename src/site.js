@@ -40,7 +40,7 @@ const Box = (tx, ty, shape, target, speed) => ({
 
 const createBox = (shape, speed) => {
     var geometry = new THREE.BoxGeometry(shape.x, shape.y, shape.z);
-    var material = new THREE.MeshBasicMaterial({color: 0x777777, wireframe: true});
+    var material = new THREE.MeshBasicMaterial({color: 0xaaaaaa, wireframe: true});
     var cube = new THREE.Mesh(geometry, material)
     cube.userData.speed = speed;
     return cube;
@@ -112,6 +112,14 @@ var untouched = true;
 var speed = 0.5;
 var untouchedTarget;
 var tween;
+var textDisplay = false;
+var textKeyframes = [
+    {tick: 700, id: "heading", display: false},
+    {tick: 720, id: "veiset", display: false},
+    {tick: 1550, id: "vzimg", display: false},
+    {tick: 1300, id: "contact", display: false},
+    {tick: 1300, id: "info", display: false},
+]
 
 function update() {
     tick += 1;
@@ -134,6 +142,14 @@ function update() {
                 .start();
         }
     }
+
+    textKeyframes.filter(frame =>
+        tick >= frame.tick && !frame.display
+    ).forEach(frame => {
+        frame.display = true;
+        document.getElementById(frame.id).classList.add('fade-animation');
+        document.getElementById(frame.id).classList.remove('fade');
+    })
 
     if (!untouched) {
         camera.position.x = mousePos.screenX / 100;
