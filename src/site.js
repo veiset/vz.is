@@ -189,9 +189,12 @@ const onDocumentMouseMove = (event) => {
 }
 const onDocumentMouseDown = (event) => {
     direction *= -1;
-    boxes.forEach(el => {
-        el.targetPosition = new THREE.Vector3(0, 0, 0);
-    });
+    if (tick > 700) {
+        tick = 670;
+        boxes.forEach(el => {
+            el.targetPosition = new THREE.Vector3(0, 0, 0);
+        });
+    }
 }
 
 const inPosition = (targetPosition, box) =>
