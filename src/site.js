@@ -2,6 +2,10 @@ const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
 const container = document.querySelector('#container');
 
+const material = new THREE.MeshBasicMaterial({color: 0x555555, wireframe: true});
+const material2 = new THREE.MeshBasicMaterial({color: 0x777777, wireframe: true});
+const material3 = new THREE.MeshBasicMaterial({color: 0x999999, wireframe: true});
+const material4 = new THREE.MeshBasicMaterial({color: 0xbebebe, wireframe: true});
 const renderer = new THREE.WebGLRenderer({antialias: true});
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 10, 10000);
 camera.position.z = 200;
@@ -28,19 +32,18 @@ const Shape = (x, y, z) => ({x, y, z});
 
 const Box = (tx, ty, shape, target, speed) => ({
     transform: {
-        x: Math.random() * 0.005 * (Math.random() > 0.5 ? 1 : -1) + 0.01,
-        y: Math.random() * 0.005 * (Math.random() > 0.5 ? 1 : -1) + 0.01,
+        x: Math.random() * 0.007 * (Math.random() > 0.5 ? 1 : -1) + (Math.random() > 0.5 ? 1 : -1) * 0.025,
+        y: Math.random() * 0.007 * (Math.random() > 0.5 ? 1 : -1) + (Math.random() > 0.5 ? 1 : -1) * 0.025,
     },
     targetPosition: target,
     initTarget: new THREE.Vector3(target.x, target.y, target.z),
-    cube: createBox(shape, speed ? speed : 0.01),
-    rspeed: Math.random() * 0.15 + 0.05,
+    cube: createBox(shape, speed ? speed : 0.02),
+    rspeed: Math.random() * 0.30 + 0.1,
 })
 
 
 const createBox = (shape, speed) => {
     var geometry = new THREE.BoxGeometry(shape.x, shape.y, shape.z);
-    var material = new THREE.MeshBasicMaterial({color: 0xaaaaaa, wireframe: true});
     var cube = new THREE.Mesh(geometry, material)
     cube.userData.speed = speed;
     return cube;
@@ -79,19 +82,24 @@ const boxes = [
     Box(0.01, -0.01, Shape(5, 5, 4), new THREE.Vector3(-10, 20, 0)),
 
     // z
-    Box(0.01, -0.01, Shape(10, 10, 2), new THREE.Vector3(8, 20, 0)),
-    Box(0.01, -0.01, Shape(10, 10, 2), new THREE.Vector3(14, 22, 0)),
+    Box(0.01, -0.01, Shape(10, 10, 4), new THREE.Vector3(8, 20, 0)),
+    Box(0.01, -0.01, Shape(4, 4, 6), new THREE.Vector3(12, 20, 0)),
+    Box(0.01, -0.01, Shape(5, 10, 3), new THREE.Vector3(14, 22, 0)),
     Box(0.01, -0.01, Shape(10, 10, 2), new THREE.Vector3(20, 21, 0)),
-    Box(0.01, -0.01, Shape(10, 10, 2), new THREE.Vector3(27, 20, 0)),
+    Box(0.01, -0.01, Shape(7, 10, 4), new THREE.Vector3(27, 20, 0)),
     Box(0.01, -0.01, Shape(10, 10, 2), new THREE.Vector3(32, 20, 0)),
-    Box(0.01, -0.01, Shape(10, 10, 2), new THREE.Vector3(28, 15, 0)),
-    Box(0.01, -0.01, Shape(10, 10, 2), new THREE.Vector3(21, 9, 0)),
-    Box(0.01, -0.01, Shape(10, 10, 2), new THREE.Vector3(16, 3, 0)),
-    Box(0.01, -0.01, Shape(10, 10, 2), new THREE.Vector3(13, -2, 0)),
-    Box(0.01, -0.01, Shape(10, 10, 2), new THREE.Vector3(19, -2, 0)),
-    Box(0.01, -0.01, Shape(10, 10, 2), new THREE.Vector3(25, -3, 0)),
-    Box(0.01, -0.01, Shape(10, 10, 2), new THREE.Vector3(32, -1, 0)),
+    Box(0.01, -0.01, Shape(7, 10, 6), new THREE.Vector3(34, 20, 0)),
+    Box(0.01, -0.01, Shape(6, 10, 2), new THREE.Vector3(28, 15, 0)),
+    Box(0.01, -0.01, Shape(7, 6, 2), new THREE.Vector3(24, 11, 0)),
+    Box(0.01, -0.01, Shape(6, 6, 5), new THREE.Vector3(21, 9, 0)),
+    Box(0.01, -0.01, Shape(7, 10, 2), new THREE.Vector3(16, 3, 0)),
+    Box(0.01, -0.01, Shape(6, 9, 3), new THREE.Vector3(13, -2, 0)),
+    Box(0.01, -0.01, Shape(4, 4, 4), new THREE.Vector3(9, -3, 0)),
+    Box(0.01, -0.01, Shape(10, 10, 3), new THREE.Vector3(19, -2, 0)),
+    Box(0.01, -0.01, Shape(10, 7, 2), new THREE.Vector3(25, -3, 0)),
+    Box(0.01, -0.01, Shape(10, 6, 7), new THREE.Vector3(32, -1, 0)),
     Box(0.01, -0.01, Shape(10, 10, 2), new THREE.Vector3(35, 0, 0)),
+    Box(0.01, -0.01, Shape(4, 5, 5), new THREE.Vector3(40, -2, 0)),
 ];
 
 const line = createLine();
@@ -99,9 +107,10 @@ const line = createLine();
 boxes.forEach(box => {
     scene.add(box.cube);
 })
-scene.add(line);
+//scene.add(line);
 
 var tick = 0;
+var textTick = 0;
 
 var vFOV = THREE.Math.degToRad(camera.fov);
 var height = 2 * Math.tan(vFOV / 2) * 200;
@@ -109,22 +118,30 @@ var width = height * camera.aspect;
 var mousePos = {screenX: 1000, screenY: 500};
 var direction = 1;
 var untouched = true;
-var speed = 0.5;
+var hoverspeed = 1;
 var untouchedTarget;
 var tween;
 var textDisplay = false;
 var textKeyframes = [
-    {tick: 700, id: "heading", display: false},
-    {tick: 720, id: "veiset", display: false},
-    {tick: 1550, id: "vzimg", display: false},
-    {tick: 1300, id: "contact", display: false},
-    {tick: 1300, id: "info", display: false},
+    {tick: 100, id: "heading", display: false},
+    {tick: 170, id: "veiset", display: false},
+    {tick: 330, id: "info", display: false},
+    {tick: 500, id: "vzimg", display: false},
 ]
+var introDuration = 380;
+var introEndDuration = 120;
 
 function update() {
+    setTimeout(function () {
+
+        requestAnimationFrame(update);
+
+    }, 1000 / 60);
+
     tick += 1;
+    textTick += 1;
     if (untouched && untouchedTarget) {
-        mousePos = {screenX: untouchedTarget.x * 100, screenY: -untouchedTarget.y * 100};
+        mousePos = {screenX: untouchedTarget.x * 100, screenY: -untouchedTarget.y * 50};
         if (tween) {
             TWEEN.update()
         } else {
@@ -144,7 +161,7 @@ function update() {
     }
 
     textKeyframes.filter(frame =>
-        tick >= frame.tick && !frame.display
+        textTick >= frame.tick && !frame.display
     ).forEach(frame => {
         frame.display = true;
         document.getElementById(frame.id).classList.add('fade-animation');
@@ -153,7 +170,7 @@ function update() {
 
     if (!untouched) {
         camera.position.x = mousePos.screenX / 100;
-        camera.position.y = -mousePos.screenY / 100;
+        camera.position.y = -mousePos.screenY / 50;
     }
 
     boxes.forEach(el => {
@@ -163,25 +180,30 @@ function update() {
         box.rotation.y += el.transform.y;
 
 
-        if (el.targetPosition && tick > 100) {
+        if (el.targetPosition && tick > 60) {
             if (!inPosition(el.targetPosition, box)) {
                 box.position.addScaledVector(el.targetPosition, box.userData.speed);
             } else {
                 box.userData.speed = 0;
-                if (tick === 400) {
+                if (tick === introDuration) {
+                    box.material = material2;
                     el.targetPosition = new THREE.Vector3(
                         Math.random() * (width / 2) * (Math.random() > 0.5 ? 1 : -1),
                         Math.random() * (height / 2) * 0.9 * (Math.random() > 0.5 ? 1 : -1),
                         0)
-                    box.userData.speed = 0.002;
+                    box.userData.speed = 0.005;
                 }
             }
         }
-        if (tick === 700) {
+        if (tick === introDuration + introEndDuration) {
+            box.material = material3;
             box.userData.speed = 0;
         }
-        if (tick > 700) {
-            box.position.x += el.rspeed * direction * speed;
+        if (tick === introDuration + introEndDuration + 60) {
+            box.material = material4;
+        }
+        if (tick > introDuration + introEndDuration + 60) {
+            box.position.x += el.rspeed * direction * hoverspeed;
             if (box.position.x >= (width / 2) + 60) {
                 box.position.x = -(width / 2) - 20;
             } else if (box.position.x <= -(width / 2) - 40) {
@@ -190,14 +212,14 @@ function update() {
         }
     });
     renderer.render(scene, camera);
-    requestAnimationFrame(update);
+    //requestAnimationFrame(update);
 }
 
 requestAnimationFrame(update);
 
 const onDocumentMouseMove = (event) => {
     if (untouched) {
-        untouchedTarget = new THREE.Vector3(event.screenX / 100, -event.screenY / 100, 0);
+        untouchedTarget = new THREE.Vector3(event.screenX / 100, -event.screenY / 50, 0);
     } else {
         speed = 0.5 + (event.screenY / window.innerHeight) * 4;
         mousePos = event;
@@ -205,8 +227,8 @@ const onDocumentMouseMove = (event) => {
 }
 const onDocumentMouseDown = (event) => {
     direction *= -1;
-    if (tick > 700) {
-        tick = 670;
+    if (tick > introDuration + introEndDuration) {
+        tick = introDuration + introEndDuration - 30;
         boxes.forEach(el => {
             el.targetPosition = new THREE.Vector3(0, 0, 0);
         });
@@ -226,6 +248,14 @@ const updateSceneRatios = () => {
     height = 2 * Math.tan(vFOV / 2) * 200;
     width = height * camera.aspect;
 };
+
+const hoverEnter = (speed) => {
+    hoverspeed = speed;
+}
+
+const hoverLeave = () => {
+    hoverspeed = 1;
+}
 
 window.addEventListener('resize', updateSceneRatios, false);
 document.addEventListener('mousemove', onDocumentMouseMove, false);
