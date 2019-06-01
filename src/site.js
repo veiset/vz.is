@@ -2,11 +2,11 @@ const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
 const container = document.querySelector('#container');
 
-const material = new THREE.MeshBasicMaterial({color: 0x555555, wireframe: true});
-const material2 = new THREE.MeshBasicMaterial({color: 0x777777, wireframe: true});
-const material3 = new THREE.MeshBasicMaterial({color: 0x999999, wireframe: true});
-const material4 = new THREE.MeshBasicMaterial({color: 0xbebebe, wireframe: true});
-const renderer = new THREE.WebGLRenderer({antialias: true});
+const material = new THREE.MeshBasicMaterial({color: 0x8E9790, wireframe: true});
+const material2 = new THREE.MeshBasicMaterial({color: 0x333333, wireframe: true});
+const material3 = new THREE.MeshBasicMaterial({color: 0x333333, wireframe: true});
+const material4 = new THREE.MeshBasicMaterial({color: 0x333333, wireframe: true});
+const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 10, 10000);
 camera.position.z = 200;
 camera.position.x = 5;
@@ -15,7 +15,6 @@ camera.position.y = -5;
 const scene = new THREE.Scene();
 
 scene.add(camera);
-scene.background = new THREE.Color(0xffffff);
 renderer.setSize(WIDTH, HEIGHT);
 
 container.appendChild(renderer.domElement);
@@ -39,15 +38,15 @@ const Box = (tx, ty, shape, target, speed) => ({
     initTarget: new THREE.Vector3(target.x, target.y, target.z),
     cube: createBox(shape, speed ? speed : 0.02),
     rspeed: Math.random() * 0.30 + 0.1,
-})
+});
 
 
 const createBox = (shape, speed) => {
     var geometry = new THREE.BoxGeometry(shape.x, shape.y, shape.z);
-    var cube = new THREE.Mesh(geometry, material)
+    var cube = new THREE.Mesh(geometry, material);
     cube.userData.speed = speed;
     return cube;
-}
+};
 
 const createLine = () => {
     var geometry = new THREE.Geometry();
@@ -106,8 +105,7 @@ const line = createLine();
 
 boxes.forEach(box => {
     scene.add(box.cube);
-})
-//scene.add(line);
+});
 
 var tick = 0;
 var textTick = 0;
@@ -121,13 +119,6 @@ var untouched = true;
 var hoverspeed = 1;
 var untouchedTarget;
 var tween;
-var textDisplay = false;
-var textKeyframes = [
-    {tick: 100, id: "heading", display: false},
-    {tick: 170, id: "veiset", display: false},
-    {tick: 330, id: "info", display: false},
-    {tick: 500, id: "vzimg", display: false},
-]
 var introDuration = 380;
 var introEndDuration = 120;
 
@@ -143,7 +134,7 @@ function update() {
     if (untouched && untouchedTarget) {
         mousePos = {screenX: untouchedTarget.x * 100, screenY: -untouchedTarget.y * 50};
         if (tween) {
-            TWEEN.update()
+            TWEEN.update();
         } else {
             tween = new TWEEN.Tween({x: camera.position.x, y: camera.position.y})
                 .to({x: untouchedTarget.x, y: untouchedTarget.y}, 250)
@@ -159,14 +150,6 @@ function update() {
                 .start();
         }
     }
-
-    textKeyframes.filter(frame =>
-        textTick >= frame.tick && !frame.display
-    ).forEach(frame => {
-        frame.display = true;
-        document.getElementById(frame.id).classList.add('fade-animation');
-        document.getElementById(frame.id).classList.remove('fade');
-    })
 
     if (!untouched) {
         camera.position.x = mousePos.screenX / 100;
@@ -190,7 +173,7 @@ function update() {
                     el.targetPosition = new THREE.Vector3(
                         Math.random() * (width / 2) * (Math.random() > 0.5 ? 1 : -1),
                         Math.random() * (height / 2) * 0.9 * (Math.random() > 0.5 ? 1 : -1),
-                        0)
+                        0);
                     box.userData.speed = 0.005;
                 }
             }
@@ -212,7 +195,6 @@ function update() {
         }
     });
     renderer.render(scene, camera);
-    //requestAnimationFrame(update);
 }
 
 requestAnimationFrame(update);
@@ -224,7 +206,8 @@ const onDocumentMouseMove = (event) => {
         speed = 0.5 + (event.screenY / window.innerHeight) * 4;
         mousePos = event;
     }
-}
+};
+
 const onDocumentMouseDown = (event) => {
     direction *= -1;
     if (tick > introDuration + introEndDuration) {
@@ -233,7 +216,7 @@ const onDocumentMouseDown = (event) => {
             el.targetPosition = new THREE.Vector3(0, 0, 0);
         });
     }
-}
+};
 
 const inPosition = (targetPosition, box) =>
     Math.abs(targetPosition.x) - Math.abs(box.position.x) <= 0 &&
@@ -248,14 +231,6 @@ const updateSceneRatios = () => {
     height = 2 * Math.tan(vFOV / 2) * 200;
     width = height * camera.aspect;
 };
-
-const hoverEnter = (speed) => {
-    hoverspeed = speed;
-}
-
-const hoverLeave = () => {
-    hoverspeed = 1;
-}
 
 window.addEventListener('resize', updateSceneRatios, false);
 document.addEventListener('mousemove', onDocumentMouseMove, false);

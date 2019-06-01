@@ -1,14 +1,22 @@
+:root {
+    --bg: #222023;
+    --light-bg: #8E9790;
+    --contrast: #8C323B;
+    --light-contrast: #D78756;
+    --secondary: #D3CCB8;
+}
 body {
-    background-color: #ffffff;
+    background-color: var(--bg);
     padding: 0;
     margin: 0;
-    overflow: hidden;
     font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 32px;
+    font-size: 38px;
     font-weight: 100;
-    color: #d6d6d6;
+    color: var(--secondary);
 }
-
+#hidden-overflow {
+    overflow: hidden;
+}
 #wrapper {
     padding: 0;
     margin: 0;
@@ -16,6 +24,22 @@ body {
     height: 100vh;
     width: 100%;
 }
+
+#wrapper-gamedev {
+    padding: 40px;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    position: relative;
+    height: 100vh;
+    max-width: 1100px;
+}
+
+#back {
+    padding-left: 30px;
+    padding-top: 90px;
+}
+
 
 #content {
     margin: auto;
@@ -25,6 +49,12 @@ body {
     max-width: 600px;
 }
 
+.heading {
+    font-size: 60px;
+    font-weight: 200;
+    color: var(--light-bg);
+}
+
 #container {
     position: absolute;
     top: 0;
@@ -32,45 +62,63 @@ body {
     z-index: -100;
 }
 
-#vzimg {
-    padding-top: 12px;
-    padding-right: 20px;
-    height: 340px;
-    float: left;
-}
-
-.heading {
-    font-weight: 200;
-    color: #000;
-}
-
 .nomargin {
     margin: 0;
 }
 
-.fade {
-    pointer-events: none;
-    opacity: 0;
+.link {
+    margin-left: 25px;
+    margin-bottom: 0;
+    margin-top: 20px;
 }
-
-.fade-animation {
-    animation: fadein 3s ease-out;
-}
-
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+.date {
+    font-size: 12px;
+    padding-top: -10px;
+    padding-left: 50px;
 }
 
 a:visited, a:link, a:active {
-    color: #000000;
+    color: var(--contrast);
     font-weight: 200;
     text-decoration: none;
 }
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    border-bottom: 1px solid var(--contrast);
+}
+
+.heading-gamedev {
+    font-size: 80px;
+    font-weight: 200;
+    color: var(--contrast);
+}
+
+.intro {
+    font-size: 30px;
+    color: var(--light-bg);
+    padding-bottom: 40px;
+}
+.date {
+    font-size: 24px;
+    padding-top: -10px;
+    padding-left: 50px;
+    padding-bottom: 30px;
+    color: var(--light-bg);
+}
+
+.change-log {
+    font-family: 'Inconsolata', monospace;
+    padding-bottom: 80px;
+}
+.change-log-heading {
+    font-size: 20px;
+    color: var(--contrast);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.change-log-content {
+    margin-left: 20px;
+    font-size: 16px;
+    color: var(--light-bg);
 }

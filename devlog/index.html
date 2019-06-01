@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gamedev - Devlog</title>
+    <meta name="description" content="gamedev">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,200" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+    <link href="../main.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="wrapper-gamedev">
+    <div id="back"><a href="../">vz.is</a></div>
+    <div id="content">
+        <div>
+            <div class="heading-gamedev">
+                <div>Update 3</div>
+                <div class="date">May 6, 2019</div>
+            </div>
+
+            <div class="intro">
+                Graphical update with improvements to monster pathing
+            </div>
+
+            <iframe width="784" height="441"
+                    src="https://www.youtube-nocookie.com/embed/x785sStt4AY"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+            <div class="change-log">
+
+                <div class="change-log-heading">Change log</div>
+
+                <div class="change-log-content">
+                    Graphical<br>
+                    - Update colors (colormind.io)<br>
+                    - Add aggressive monster<br>
+                    - Add parallax and graphic for main screen and talent tree<br>
+                    - Add lootbar<br>
+                    - Implement LootModule with animations based on Lootbar<br>
+                    - Add animation and gfx for circle of fire<br>
+                    - Add attack animation and collision animation<br>
+                    <br>
+                    Sound<br>
+                    - Add sound effect for lootbar (sound-effect made by coffee cup and toothpick)<br>
+                    <br>
+                    Optimization<br>
+                    - Add profiling of gameloop<br>
+                    - Add async resource loading<br>
+                    <br>
+                    Misc<br>
+                    - Update debug hotkeys<br>
+                    - A* debug drawing<br>
+                    - Add cli ascii art<br>
+                    <br>
+                    Bugfixes<br>
+                    - Fixed bug with item index in lootmodule<br>
+                    <br>
+                    Engine<br>
+                    - A* algorithm<br>
+                    - Add debug options for main, you can now run modules easier<br>
+                    - Add boss scenario with boss<br>
+                    - Add parameter for number of monsters on debug-startup<br>
+                    - Add cheat to select whatever map you want in the universe screen<br>
+                    - Refactor equipment management<br>
+                    - Add collision groups<br>
+                    - Rework modifier engine and modifier system<br>
+                    - Use loot from lootbar instead of entity manager<br>
+                    - Moved loot and loot systems to engine<br>
+                    - Restructure project. Move modules out of core engine<br>
+                    - Moved overlays out of engine core<br>
+                    - Clean up SlimeEnemy<br>
+                    - Move Slime enemy clean up logic to teardown function<br>
+                    - Bump library versions<br>
+                    - Add delta for update AND draw
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="heading-gamedev">
+                <div>Update 2</div>
+                <div class="date">Apr 16, 2019</div>
+            </div>
+
+            <div class="intro">
+                World map selector and equipment
+            </div>
+
+            <iframe width="784" height="441"
+                    src="https://www.youtube-nocookie.com/embed/2K94UDdwlSk"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+            <div class="change-log">
+
+                <div class="change-log-heading">Change log</div>
+
+                <div class="change-log-content">
+                    Gameplay<br>
+                    - Add death screen<br>
+                    - Integrate world selector in gameplay<br>
+                    - Add currency and fragment items<br>
+                    - World selector<br>
+                    - Working inventory with equipment swapping<br>
+                    - Add simple equipment<br>
+                    - Add equipment screen<br>
+                    - Add modifiers<br>
+                    - Add reflect modifier<br>
+                    <br>
+                    Graphical<br>
+                    - Add tiles and simple shooting graphic<br>
+                    - Add character sprite<br>
+                    - Add universe screen zoom and offset to global state<br>
+                    - Add galaxy drawing<br>
+                    - Scaled click position for universe selecting<br>
+                    - Add scaling world icons<br>
+                    - Add new icons<br>
+                    - Graphical scaling<br>
+                    - Add inventory and equipment buttons<br>
+                    <br>
+                    Sound<br>
+                    - Soundtrack<br>
+                    - Sound effects for attacks<br>
+                    - Music player and sound loading hack<br>
+                    <br>
+                    Optimization<br>
+                    - Optimized new world optimization algorithm speed by 30 times<br>
+                    - Change world optimization wall algorithm, use collision to playable world to check if we should
+                    keep
+                    wall<br>
+                    - Draw optimization for Universe<br>
+                    - Optimized hover effect for universe selection<br>
+                    <br>
+                    Misc<br>
+                    - Keybindings file. Update item drops<br>
+                    - Add keybinding info overlay<br>
+                    - Fatjar build step<br>
+                    - Add concept of item rarirty
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="heading-gamedev">
+                <div>Update 1</div>
+                <div class="date">Jan 26, 2019</div>
+            </div>
+
+            <div class="intro">
+                Initial
+            </div>
+
+            <iframe width="784" height="441"
+                    src="https://www.youtube-nocookie.com/embed/CNYRz-y4WxA"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+            <div class="change-log">
+
+                <div class="change-log-heading">Change log</div>
+
+                <div class="change-log-content">
+                    World map generation<br>
+                    Physics<br>
+                    Simple attacks
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

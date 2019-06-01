@@ -7,54 +7,33 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,200" rel="stylesheet">
     <link href="main.css" rel="stylesheet">
 </head>
-<body>
+<body id="hidden-overflow">
 <div id="wrapper">
     <div id="content">
-        <div>
-            <img alt="Vegard Veiset" id="vzimg" class="fade" src="media/vzimg.jpg">
-        </div>
-        <div>
-            <p id="heading" class="nomargin fade heading">
-                Vegard Veiset
-            </p>
-            <p id="veiset" class="nomargin fade">
-                veiset /væj-set/n 1: a full stack software
-                <a href="https://github.com/veiset"
-                   onmouseleave="hoverLeave()"
-                   onmouseenter="hoverEnter(-5)">
-                    developer
-                </a>
-                with a passion for Kotlin 2: a world explorer 3: an avid coffee consumer 4: a hobby photographer.
-            </p>
-            <p id="info" class="nomargin fade">
-                contact information: email /ē-ˌmāl/n 1: <span class="keyword">vegard at veiset dot org</span> 2: a system
-                for sending messages from one computer to another computer.
-                <a href="https://www.linkedin.com/in/vegard-veiset-68792b5a/"
-                   onmouseleave="hoverLeave()"
-                   onmouseenter="hoverEnter(-5)">
-                    linkedin
-                </a>
-                /ˌliŋkt.ˈin/n 1: cult with over 100 million active members
-                2: a social networking website for
-                people in professional occupations.
-                <a href="https://twitter.com/veiset"
-                   onmouseleave="hoverLeave()"
-                   onmouseenter="hoverEnter(-5)">
-                    twitter
-                </a>
-                /twi-tər/v 1: to make fast and usually high sounds 2: to
-                talk in a quick and informal way about
-                unimportant things.
-            </p>
-        </div>
+        <p id="heading" class="nomargin heading">
+            Vegard Veiset
+        </p>
+        <p class="link">
+            <a href="devlog/">Dev log</a>
+        </p>
+        <p class="link">
+            <a href="https://github.com/veiset/">Github</a>
+        </p>
+        <p class="link">
+            <a href="https://www.linkedin.com/in/vegard-veiset-68792b5a/">Linkedin</a>
+        </p>
+        <p class="link">
+            <a href="mailto:veiset@gmail.com">Contact</a>
+        </p>
     </div>
-    <div id="container"></div>
 </div>
+<div id="container"></div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-51837516-1"></script>
 <script src="lib/three.min.js"></script>
 <script src="lib/Tween.min.js"></script>
 <script src="src/site.js"></script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-51837516-1"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
 
