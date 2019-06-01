@@ -12,6 +12,63 @@
 <div id="back"><a href="../">< vz.is</a></div>
 <div id="wrapper-gamedev">
     <div id="content">
+
+
+        <div>
+            <div class="heading-gamedev">
+                <div>Update 4</div>
+                <div class="date">June 1, 2019</div>
+            </div>
+
+            <div class="intro">
+                Optimization! The game was getting sluggish at around 200 monsters, now its possible to run at least
+                2000 monsters (on a beefy computer).
+            </div>
+
+            <iframe width="784" height="441"
+                    src="https://www.youtube-nocookie.com/embed/9DIsHFzZfyg"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+            <div class="change-log">
+
+                <div class="change-log-heading">Change log</div>
+
+                <div class="change-log-content">
+                    Graphical<br>
+                    - New character model<br>
+                    - Better font scaling<br>
+                    - Update character screen with new models<br>
+                    - Add equipment animation<br>
+                    - Inventory in character module<br>
+                    <br>
+                    Itemization<br>
+                    - Remove deprecated modifiers for items<br>
+                    - Improve random modifier generation<br>
+                    - Generate items with new modifiers<br>
+                    <br>
+                    Optimization<br>
+                    - Pathing now only calculates at a given<br>
+                    - Optimized WorldModule drawing. Reduced draw time by 60%<br>
+                    - Create a profiler making debugging resource usage much easier<br>
+                    <br>
+                    Bugfixes<br>
+                    - Fixed nasty memory access bug with libgdx which caused the JVM to crash<br>
+                    - Fix bug in modifier generator when no mods present<br>
+                    <br>
+                    Engine<br>
+                    - Update resource monitor to be generalized<br>
+                    - Constant colors for normal resource monitors<br>
+                    - Refactor CharacterModule<br>
+                    - Better resource display. Show ms for frame and for game updates<br>
+                    - Refactor hoverbox to hoverbox and clickbox<br>
+                    - Add new character module<br>
+                    - Add memory usage to resource display
+                </div>
+            </div>
+        </div>
+
         <div>
             <div class="heading-gamedev">
                 <div>Update 3</div>
